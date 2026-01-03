@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { Plant, TerrariumState, PlantProgress } from '../types';
+import { TerrariumState, PlantProgress } from '../types';
 
 interface GrowthWidgetProps {
   onClick: () => void;
@@ -9,10 +9,10 @@ interface GrowthWidgetProps {
 
 const GrowthWidget: React.FC<GrowthWidgetProps> = ({ onClick, gameState }) => {
   const controls = useAnimation();
-  
+
   // Calculate total XP/Level for global animation state
   const totalLevel = (Object.values(gameState) as PlantProgress[]).reduce((acc: number, curr: PlantProgress) => acc + curr.level, 0);
-  
+
   // Trigger animation when level changes
   useEffect(() => {
     controls.start({
@@ -30,7 +30,7 @@ const GrowthWidget: React.FC<GrowthWidgetProps> = ({ onClick, gameState }) => {
       onClick={onClick}
     >
       <div className="relative w-14 h-14 flex items-center justify-center overflow-hidden rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
-        
+
         {/* Animated Plant SVG */}
         <motion.svg
           width="40"
@@ -41,36 +41,36 @@ const GrowthWidget: React.FC<GrowthWidgetProps> = ({ onClick, gameState }) => {
         >
           {/* Pot */}
           <path d="M30,70 L70,70 L65,90 L35,90 Z" fill="#8d6e63" />
-          
+
           {/* Stem - Grows with level */}
-          <motion.path 
-            d="M50,70 Q50,60 50,50" 
-            stroke="currentColor" 
-            strokeWidth="4" 
-            fill="none" 
+          <motion.path
+            d="M50,70 Q50,60 50,50"
+            stroke="currentColor"
+            strokeWidth="4"
+            fill="none"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: Math.min(1, totalLevel * 0.1) + 0.2 }}
           />
 
           {/* Leaves - Appear based on level thresholds */}
           {totalLevel > 2 && (
-             <motion.path 
-               d="M50,60 Q30,50 30,40 Q50,40 50,60" 
-               fill="#4caf50" 
-               initial={{ scale: 0 }} 
-               animate={{ scale: 1 }}
+            <motion.path
+              d="M50,60 Q30,50 30,40 Q50,40 50,60"
+              fill="#4caf50"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
             />
           )}
           {totalLevel > 5 && (
-             <motion.path 
-               d="M50,55 Q70,45 70,35 Q50,35 50,55" 
-               fill="#66bb6a"
-               initial={{ scale: 0 }} 
-               animate={{ scale: 1 }}
+            <motion.path
+              d="M50,55 Q70,45 70,35 Q50,35 50,55"
+              fill="#66bb6a"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
             />
           )}
           {totalLevel > 10 && (
-             <circle cx="50" cy="30" r="5" fill="#f44336" />
+            <circle cx="50" cy="30" r="5" fill="#f44336" />
           )}
         </motion.svg>
 

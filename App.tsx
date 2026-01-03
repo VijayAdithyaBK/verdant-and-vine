@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Leaf, Instagram, Facebook, Twitter, MapPin, Phone, Mail, Loader2 } from 'lucide-react';
 import Hero from './components/Hero';

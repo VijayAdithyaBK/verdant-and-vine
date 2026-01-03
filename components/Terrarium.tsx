@@ -123,12 +123,6 @@ const CartoonPlant = ({ plant, level }: { plant: Plant; level: number }) => {
     transition: { duration: 0.6, type: "spring" as const, stiffness: 200, damping: 15 }
   };
 
-  const growHeight = {
-    initial: { scaleY: 0 },
-    animate: { scaleY: 1 },
-    transition: { duration: 0.8, ease: "easeOut" as const }
-  };
-
   // Adjust Y translation to move plants lower in the pot area since we have more vertical space
   const BASE_Y = 85;
 
@@ -227,8 +221,6 @@ const CartoonPlant = ({ plant, level }: { plant: Plant; level: number }) => {
     }
   }
 
-  // Updated Pot Position Y to match new BASE_Y (85) - pot radius (20) approx
-  const POT_Y = 80;
 
   return (
     <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md filter overflow-visible">
